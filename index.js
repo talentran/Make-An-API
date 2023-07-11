@@ -1,6 +1,7 @@
 const express = require('express');
 const app = express();
 const PORT = 3000;
+const cors = require('cors')
 
 let foodArray = [
     {name: "Pizza", country: "Italy", main_ingredients: ["Dough", "Tomato Sauce", "Cheese", "Toppings"]},
@@ -108,6 +109,8 @@ let foodArray = [
     {name: "Empanada", country: "Spain", main_ingredients: ["Dough", "Meat", "Cheese", "Vegetables"]},
     {name: "Poutine", country: "Canada", main_ingredients: ["Fries", "Cheese Curds", "Gravy"]}
   ];
+
+app.use(cors())
 
 app.get('/', (req, res) => {
   res.json(foodArray);
