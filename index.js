@@ -154,6 +154,19 @@ app.get('/ingredient/:ingredient', (req, res) => {
   }
 });
 
+app.get('/foods', (req, res) => {
+  res.json(foodArray);
+});
+
+app.get('/foods/:name', (req, res) => {
+  let food = foodArray.find(f => f.name.toLowerCase() === req.params.name.toLowerCase());
+  if(food){
+      res.json(food);
+  } else {
+      res.status(404).json({message: `No food with the name: ${req.params.name}`});
+  }
+});
+
 app.listen(PORT, () => {
   console.log(`Server is running on http://localhost:${PORT}`);
 });
