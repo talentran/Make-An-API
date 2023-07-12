@@ -157,8 +157,21 @@ app.get('/ingredient/:ingredient', (req, res) => {
   }
 });
 
-app.get('/foods', (req, res) => {
-  res.json(foodArray);
+app.get("/foods", (req, res) => {
+  const { ingredient, country } = req.query;
+  const filteredByIngredient = foodArray.filter((food) => {
+    if (food.main_ingredients.includes(ingredient)) {
+      return true;
+    }
+    return false;
+  });
+  const filteredByBothFields = filteredByIngredient.filter((food) => {
+    if (food.country.toLowerCase() === country.toLowerCase()) {
+      return true;
+    }
+    return false;
+  });
+  res.status(200).json(filteredByBothFields);
 });
 
 app.get('/foods/:name', (req, res) => {
